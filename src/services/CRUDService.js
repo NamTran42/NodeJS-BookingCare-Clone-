@@ -1,4 +1,3 @@
-import { reject } from "bcrypt/promises";
 import bcrypt from "bcryptjs";
 import db from "../models/index";
 
@@ -29,8 +28,11 @@ let createNewUser = async (data) => {
 let hashUserPassword = (password) => {
   return new Promise(async (resolve, reject) => {
     try {
-      let hashPassword = await bcrypt.hashSync("B4c0//", salt);
-      resolve(hashPassword);
+      //lưu ý, truyền vào đúng password cần hash
+      // let hashPassWord = await bcrypt.hashSync("B4c0/\/", salt); => copy paste mà ko edit nè
+      let hashPassWord = bcrypt.hashSync(password, salt);
+
+      resolve(hashPassWord);
     } catch (e) {
       reject(e);
     }
